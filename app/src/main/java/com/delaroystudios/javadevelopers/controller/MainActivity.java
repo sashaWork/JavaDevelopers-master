@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     TextView Disconnected;
     private Item item;
-//    ProgressDialog pd;
+    //    ProgressDialog pd;
     private SwipeRefreshLayout swipeContainer;
 
     @Override
@@ -41,29 +41,29 @@ public class MainActivity extends AppCompatActivity {
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh(){
+            public void onRefresh() {
                 loadJSON();
                 Toast.makeText(MainActivity.this, "Github Users Refreshed", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void initViews(){
+    private void initViews() {
 //        pd = new ProgressDialog(this);
 //        pd.setMessage("Fetching Github Users...");
 //        pd.setCancelable(false);
 //        pd.show();
-        recyclerView=(RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.smoothScrollToPosition(0);
         loadJSON();
     }
 
-    private void loadJSON(){
+    private void loadJSON() {
         Disconnected = (TextView) findViewById(R.id.disconnected);
-        try{
+        try {
             Client Client = new Client();
             Service apiService =
                     Client.getClient().create(Service.class);
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("Error", e.getMessage());
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
